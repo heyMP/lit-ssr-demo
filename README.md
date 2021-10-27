@@ -5,6 +5,7 @@ This is an example web component that uses Lit SSR to provide server-side render
 ## Demo
 
 Source page: https://lit-ssr-demo.vercel.app
+
 SSR'd proxy: https://lit-ssr-demo.vercel.app/api/ssr
 
 ## Start Development Server
