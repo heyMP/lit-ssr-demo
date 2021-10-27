@@ -8,7 +8,10 @@ export class MpElement extends LitElement {
   static get styles() {
     return css`
       :host {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
       .tag {
         border: 1px solid rgba(0, 0, 0, 0.7);
@@ -49,6 +52,16 @@ export class MpElement extends LitElement {
         justify-content: center;
         font-size: 2.5rem;
       }
+      .notice {
+        display: flex;
+        margin: 2rem auto;
+      }
+      form {
+        display: flex;
+        margin: 2rem auto;
+        font-size: 1.2rem;
+        gap: 1rem;
+      }
     `;
   }
 
@@ -63,6 +76,21 @@ export class MpElement extends LitElement {
     this.name = 'Somebody';
   }
 
+  /**
+   * Isomorphic import.meta.url function
+   * Requires a node.js dom shim that sets window.location
+   *
+   * @param {string} relativeLocation
+   * @returns {string} url
+   */
+  static getImportURL(relativeLocation) {
+    const url = new URL(relativeLocation, import.meta.url);
+    if (url.protocol === 'file:') {
+      return new URL(relativeLocation, window.location.href);
+    }
+    return url;
+  }
+
   render() {
     return html`
       <section class="tag" id="outer">
@@ -70,12 +98,17 @@ export class MpElement extends LitElement {
           <h1 class="tag-title">Hello</h1>
           <p class="tag-copy">My Name Is</p>
         </div>
-        <div class="tag-name">
-          ${this.name}
-        </div>
+        <div class="tag-name">${this.name}</div>
       </section>
+      <form>
+        <label for="name">Name:</label>
+        <input id="name" .value=${this.name} @input=${e => { this.name = e.target.value; }} $ref="input" />
+      </form>
+
+      <div>
+        <img src=${this.constructor.getImportURL('../assets/elmo.gif')} alt="elmo on fire meme">
+      </div>
+      <div class="notice">Current window location ${window.location}</div>
     `;
   }
 }
-
-customElements.define(MpElement.tag, MpElement);

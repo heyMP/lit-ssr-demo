@@ -3,27 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      nomodule
-      src="https://unpkg.com/@webcomponents/webcomponentsjs@2.5.0/custom-elements-es5-adapter.js"
-    ></script>
-    <!-- Add support for Web Components to older browsers. -->
-    <script
-      nomodule
-      src="https://unpkg.com/@webcomponents/webcomponentsjs@2.5.0/webcomponents-loader.js"
-    ></script>
     <script type="module" src="../mp-element.js"></script>
     <style>
       body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         padding: 0;
         margin: 0;
+        min-height: 100vh;
       }
     </style>
   </head>
   <body>
     <section>
-      <h2>Default:</h2>
-      <mp-element></mp-element>
+      <mp-element name="SSR 🎉"></mp-element>
     </section>
   </body>
 </html>
