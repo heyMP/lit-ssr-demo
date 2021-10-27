@@ -1,0 +1,79 @@
+{
+  "name": "mp-element",
+  "description": "Webcomponent mp-element following open-wc recommendations",
+  "license": "MIT",
+  "author": "mp-element",
+  "version": "0.0.0",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server",
+    "start:proxy": "nodemon ./scripts/edge-proxy.js",
+    "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch",
+    "test:a11y": "axe http://localhost:3000/demo --timeout=120 --load-delay=2000",
+    "build": "npm run build:deploy",
+    "build:deploy": "node ./scripts/deploy.js"
+  },
+  "dependencies": {
+    "lit": "^2.0.0",
+    "@patternfly/pfe-cta": "^1.11.2",
+    "@patternfly/pfe-icon": "^1.11.2"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@open-wc/eslint-config": "^4.3.0",
+    "@open-wc/testing": "next",
+    "@lit-labs/ssr": "^1.0.0",
+    "@web/dev-server": "^0.1.24",
+    "@web/test-runner": "^0.13.18",
+    "cheerio": "^1.0.0-rc.10",
+    "esbuild": "^0.13.9",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "express": "^4.7.1",
+    "express-http-proxy": "^1.6.2",
+    "glob": "^7.2.0",
+    "nodesi": "*",
+    "nodemon": "^2.0.13",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "node-fetch": "^3.0.0",
+    "prettier": "^2.4.1",
+    "parse5": "^6.0.1",
+    "hast-util-to-html": "^8.0.2",
+    "hast-util-select": "^5.0.1",
+    "hast-util-from-parse5": "^7.1.0",
+    "hast-util-find-and-replace": "^4.0.0",
+    "hast-util-from-dom": "^4.0.1",
+    "hastscript": "^7.0.2",
+    "recursive-copy": "^2.0.13",
+    "replace-in-file": "^6.3.2"
+  },
+  "customElements": "custom-elements.json",
+  "eslintConfig": {
+    "extends": [
+      "@open-wc",
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}
